@@ -1,0 +1,46 @@
+.cards {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.cards__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.cards__button {
+    width: 100%;
+    height: 36px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 50px auto 80px;
+    background: #2F2F2F;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+    .cards {
+        padding-top: 60px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .cards {
+        padding-top: 40px;
+    }
+    
+    .cards__list {
+        gap: 20px;
+    }
+}

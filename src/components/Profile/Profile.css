@@ -1,0 +1,118 @@
+.main-profile {
+    display: flex;
+    flex-direction: column;
+    width: 410px;
+}
+
+.profile__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding-top: 74px;
+    padding-bottom: 123px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.profile__form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.profile__form:first-of-type {
+    border-bottom: 1px solid #424242;
+}
+
+.profile__name {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+.profile__input {
+    padding: 16px;
+    border: none;
+    margin-top: 10px;
+    color: #FFFFFF;
+    background: #202020;
+}
+
+.profile__button {
+    width: 100%;
+    height: 16px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 220px;
+    color: #FFFFFF;
+}
+
+.profile__button_type_link {
+    display: block;
+    margin-top: 16px;
+    color: #EE3465;
+    margin-bottom: 70px;
+    text-decoration: none;
+}
+
+.profile__button_type_save {
+    display: none;
+    height: 45px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 220px auto 70px;
+}
+
+.profile__signup {
+    display: flex;
+    justify-content: center;
+}
+
+.profile__signup-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__title {
+        padding-top: 236px;
+        padding-bottom: 96px;
+    }
+
+    .profile__button {
+        margin-top: 210px;
+    }
+
+    .profile__button_type_link {
+        margin-top: 16px;
+        margin-bottom: 262px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .main-profile {
+        width: 260px;
+    }
+
+    .profile__title {
+        padding-top: 58px;
+        padding-bottom: 92px;
+    }
+
+    .profile__button {
+        margin-top: 379px;
+    }
+
+    .profile__button_type_link {
+        margin-top: 8px;
+        margin-bottom: 40px;
+    }
+}
