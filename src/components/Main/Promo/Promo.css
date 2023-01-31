@@ -1,5 +1,7 @@
 .promo {
     width: 100%;
+    padding: 20px 40px 0;
+    box-sizing: border-box;
     background-color: #202020;
 }
 
@@ -54,6 +56,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .promo {
+        padding: 20px 20px 0;
+    }
+
     .promo__container {
         max-width: 768px;
         padding: 0;
@@ -69,28 +75,33 @@
 
     .promo__nav {
         margin: 314px auto 0;
+        padding: 0 0 30px;
     }
 }
 
 @media screen and (max-width: 400px) {
+    .promo {
+        padding: 14px 14px 0;
+    }
+
     .promo__title {
         font-size: 29px;
         line-height: 37px;
-        padding-top: 183px;
+        padding-top: 220px;
     }
 
     .promo__nav {
         margin: 212px auto 0;
         padding: 0 17px 17px;
-    
+
     }
-    
+
     .promo__nav-item {
         width: 82px;
         height: 26px;
         border-radius: 6px;
     }
-    
+
     .promo__link {
         font-size: 10px;
         padding: 5px 12px;

@@ -21,8 +21,10 @@
 .search-form__fieldset:first-child {
     flex: 2;
     max-width: 932px;
+    height: 34px;
     border: 1.5px solid rgba(170,170,170,0.2);
     border-radius: 50px;
+    padding: 7px;
 }
 
 .search-form__input {
@@ -113,10 +115,6 @@
 
     .search-form {
         flex-direction: column;
-    }
-
-    .search-form__fieldset {
-        width: 100%;
     }
 
     .search-form__fieldset_type_check {

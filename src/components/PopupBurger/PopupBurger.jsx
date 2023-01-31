@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import './PopupBurger.css';
 import account from '../../images/acc_icon.svg';
-import closeIcon from '../../images/close_icon.svg';
 
 function PopupBurger(props) {
     const location = useLocation();
@@ -13,9 +12,7 @@ function PopupBurger(props) {
     return (
         <div className={`popup ${props.isOpen ? 'popup_type_opened' : ''}`}>
             <div className="popup__container">
-                <button className="button-close" type="button" aria-label="close" onClick={props.onClose}>
-                    <img className="popup__close-icon" src={closeIcon} alt='Крестик' />
-                </button>
+                <button className="button-close" type="button" aria-label="close" onClick={props.onClose}></button>
                 <nav className="popup__nav">
                     <ul className="popup__list">
                         {isMoviesPage &&
