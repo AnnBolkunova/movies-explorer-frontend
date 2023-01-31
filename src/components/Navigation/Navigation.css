@@ -28,7 +28,7 @@
     margin: 0;
     font-weight: 500;
     font-size: 13px;
-    padding: 9px 7px;
+    padding-right: 7px;
 }
 
 .header__account-icon {
@@ -47,6 +47,14 @@
 @media screen and (max-width: 768px) {
     .header__content {
         padding: 18px 30px;
+    }
+
+    .navigation_type_compact {
+        display: none;
+    }
+
+    .header__list_type_compact {
+        display: none;
     }
 
     .header__container-burger {

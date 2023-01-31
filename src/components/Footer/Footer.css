@@ -87,7 +87,7 @@
         flex-direction: column;
         order: -1;
         text-align: center;
-        padding-bottom: 18px;
+        padding: 0;
     }
 
     .footer__item {

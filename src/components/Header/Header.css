@@ -27,8 +27,13 @@
 }
 
 .header__item {
-    display: flex;
-    justify-content: center;
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+.header__item_type_first {
+    padding-right: 30px;
 }
 
 .header__item_type_green {
@@ -38,7 +43,7 @@
 .header__link {
     font-weight: 500;
     font-size: 13px;
-    line-height: 12px;
+    line-height: 32px;
     text-decoration: none;
     color: #FFFFFF;
     display: flex;

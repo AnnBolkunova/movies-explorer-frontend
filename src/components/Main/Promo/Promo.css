@@ -81,7 +81,7 @@
 
     .promo__nav {
         margin: 212px auto 0;
-        padding-bottom: 17px;
+        padding: 0 17px 17px;
     
     }
     
@@ -93,5 +93,6 @@
     
     .promo__link {
         font-size: 10px;
+        padding: 5px 12px;
     }
 }
