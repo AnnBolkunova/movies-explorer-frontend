@@ -1,0 +1,21 @@
+.movies {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    .movies {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .movies {
+        padding: 0 10px;
+    }
+}

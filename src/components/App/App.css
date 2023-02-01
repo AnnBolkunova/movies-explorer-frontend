@@ -1,0 +1,39 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/fonts/inter.css');
+
+.page {
+    width: 100%;
+    min-width: 320px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #202020;
+    color: #FFFFFF;
+}
+
+.button {
+    padding: 0;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    margin: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button:disabled {
+    cursor: default;
+    color: #C2C2C2;
+}
+
+.animation {
+    opacity: 1;
+    transition: .3s;
+}
+
+.animation:hover {
+    opacity: .7;
+}

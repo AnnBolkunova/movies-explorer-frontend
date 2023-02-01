@@ -1,0 +1,128 @@
+.main-register {
+    display: flex;
+    flex-direction: column;
+    max-width: 396px;
+}
+
+.logo-register {
+    width: 38px;
+    height: 38px;
+    margin-top: 70px;
+}
+
+.register__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.register__name {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #8B8B8B;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.register__input {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background: #2F2F2F;
+    border-radius: 8px;
+    color: #FFFFFF;
+}
+
+.register__input:last-of-type {
+    color: #EE3465;
+}
+
+.register__error {
+    color: #EE3465;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 10px 0 0;
+}
+
+.register__button {
+    width: 396px;
+    height: 45px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 69px auto 16px;
+    background: #4285F4;
+    border-radius: 3px;
+    color: #FFFFFF;
+}
+
+.register__signin {
+    display: flex;
+    justify-content: center;
+}
+
+.register__text {
+    color: #8B8B8B;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 0;
+    padding-right: 6px;
+}
+
+.register__signin-link {
+    text-decoration: none;
+    color: #4285F4;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+    .logo-register {
+        margin-top: 232px;
+    }
+
+    .register__signin {
+        margin-bottom: 232px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .main-register {
+        max-width: 260px;
+    }
+
+    .logo-register {
+        margin: 56px auto 0;
+    }
+
+    .register__title {
+        padding-top: 50px;
+        padding-bottom: 60px;
+        text-align: center;
+    }
+
+    .register__button {
+        width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+        margin: 157px auto 14px;
+    }
+
+    .register__signin {
+        margin-bottom: 30px;
+    }
+}
