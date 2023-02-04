@@ -16,7 +16,7 @@ export const serializeSavedMovie = (card) => (
 
 const apiConfig = {
     baseUrl: 'https://api.nomoreparties.co',
-    mainBaseUrl: 'https://api.diploma.ann-bolkunova.nomoredomains.club',
+    mainBaseUrl: 'http://api.diploma.ann-bolkunova.nomoredomains.club',
     // mainBaseUrl: 'http://localhost:3010',
     headers:
     {
