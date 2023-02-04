@@ -1,4 +1,4 @@
 # Front-end дипломного проекта
 
-Макет в Figma:
+Маект в Figma:
 https://disk.yandex.ru/d/bOQ6bNGsy6mglw
