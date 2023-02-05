@@ -5,9 +5,9 @@ export const serializeSavedMovie = (card) => (
         duration: card.duration,
         year: card.year,
         description: card.description,
-        image: `https://api.nomoreparties.co/beatfilm-movies/${card.image.url}`,
+        image: `https://api.nomoreparties.co/${card.image.url}`,
         trailerLink: card.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/beatfilm-movies/${card.image.url}`,
+        thumbnail: `https://api.nomoreparties.co/${card.image.url}`,
         movieId: card.id,
         nameRU: card.nameRU,
         nameEN: card.nameEN
@@ -15,7 +15,7 @@ export const serializeSavedMovie = (card) => (
 );
 
 const apiConfig = {
-    baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+    baseUrl: 'https://api.nomoreparties.co',
     mainBaseUrl: 'http://api.diploma.ann-bolkunova.nomoredomains.club',
     // mainBaseUrl: 'http://localhost:3010',
     headers:
