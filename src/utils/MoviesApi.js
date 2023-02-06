@@ -3,7 +3,7 @@ import apiConfig from "./Utils";
 class MoviesApi {
     constructor(apiConfig) {
         this._baseUrl = apiConfig.baseUrl;
-        this._headers = apiConfig.headers;
+        // this._headers = apiConfig.headers;
     }
 
     _handleResponse = (res) => {
@@ -14,9 +14,9 @@ class MoviesApi {
     }
 
     getMovies() {
-        return fetch(`${this._baseUrl}/beatfilm-movies`, {
+        return fetch(`${this._baseUrl}/beatfilm-movies`/*, {
             headers: this._headers
-        })
+        }*/)
             .then(this._handleResponse);
     }
 }
