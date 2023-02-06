@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { serializeSavedMovie } from '../../utils/Utils';
+import { LOCALSTORAGE_JWT, SHORT_DURATION, WINDOW_SIZE_BIG, WINDOW_SIZE_SMALL, INIT_AMOUNT, INIT_AMOUNT_MORE, SMALL_AMOUNT, SMALL_AMOUNT_MORE } from '../../utils/constants';
 
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
@@ -22,12 +23,13 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 function filterCards(name, isShorts, cards) {
     return cards.filter((card) => {
         const isName = card.nameRU.toLowerCase().includes(name.toLowerCase());
-        const isMoviesShorts = isShorts ? card.duration <= 40 : true;
+        const isMoviesShorts = isShorts ? card.duration <= SHORT_DURATION : true;
         return isName && isMoviesShorts;
     });
 }
 
 function App() {
+
     const [currentUser, setCurrentUser] = useState({
         name: '',
         email: ''
@@ -53,15 +55,15 @@ function App() {
     const navigate = useNavigate();
 
     function calcCardsCounter() {
-        const counter = { init: 7, more: 7 };
+        const counter = { init: INIT_AMOUNT, more: INIT_AMOUNT_MORE };
 
-        if (window.innerWidth < 1280) {
-            counter.init = 7;
-            counter.more = 7;
+        if (window.innerWidth < WINDOW_SIZE_BIG) {
+            counter.init = INIT_AMOUNT;
+            counter.more = INIT_AMOUNT_MORE;
         }
-        if (window.innerWidth < 480) {
-            counter.init = 5;
-            counter.more = 2;
+        if (window.innerWidth < WINDOW_SIZE_SMALL) {
+            counter.init = SMALL_AMOUNT;
+            counter.more = SMALL_AMOUNT_MORE;
         }
 
         return counter;
@@ -76,7 +78,7 @@ function App() {
     }
 
     function tokenCheck() {
-        const token = localStorage.getItem('jwt');
+        const token = localStorage.getItem(LOCALSTORAGE_JWT);
         mainApi.setToken(token);
         if (token) {
             mainApi.getUserInfo()
@@ -114,19 +116,25 @@ function App() {
         return mainApi.authorize(email, password)
             .then((data) => {
                 if (!data.token) throw new Error('Missing jwt');
-                localStorage.setItem('jwt', data.token);
+                localStorage.setItem(LOCALSTORAGE_JWT, data.token);
                 setLoggedIn(true);
                 navigate('/movies');
             })
             .catch(err => (err.message));
     }
 
+    function handleLogout() {
+        localStorage.removeItem(LOCALSTORAGE_JWT);
+    }
+
     function handleUpdateUserInfo(name, email) {
-        mainApi.updateUserInfo(name, email)
+        return mainApi.updateUserInfo(name, email)
             .then((user) => {
                 setCurrentUser(user.data);
             })
-            .catch(err => (err.message))
+            .catch(err => {
+                throw err;
+            });
     }
 
     function handleSearchFilm(name, isShorts) {
@@ -219,7 +227,7 @@ function App() {
                     <Route path='/signin' element={<Login onLogin={handleLogin} />} />
                     <Route path='/profile' element={
                         <ProtectedRoute loggedIn={loggedIn}>
-                            <Profile onUpdateUser={handleUpdateUserInfo} />
+                            <Profile onUpdateUser={handleUpdateUserInfo} onLogout={handleLogout} />
                         </ProtectedRoute>
                     } />
                     <Route path='/movies' element={

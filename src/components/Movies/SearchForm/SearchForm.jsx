@@ -5,7 +5,7 @@ function SearchForm(props) {
 
     const [searchName, setSearchName] = useState(props.savedSearchName);
     const [searchShorts, setSearchShorts] = useState(props.savedSearchShorts);
-    const [isRequestEmpty, setIsRequestEmpty] = useState(true);
+    const [isRequestEmpty, setIsRequestEmpty] = useState(!searchName);
     const [disabled, setDisabled] = useState(true);
 
     function handleChange(e) {
@@ -53,7 +53,7 @@ function SearchForm(props) {
                         className="animation button search-form__button"
                         type="submit"
                         aria-label="Найти"
-                        disabled={disabled} >
+                        disabled={disabled} >Найти
                     </button>
                 </fieldset>
                 <fieldset className="search-form__fieldset search-form__fieldset_type_check">

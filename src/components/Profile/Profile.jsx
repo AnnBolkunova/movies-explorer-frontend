@@ -29,6 +29,8 @@ function Profile(props) {
 
 
     function handleChange(e) {
+        e.preventDefault();
+
         const { name, value } = e.target;
         setFormValue({
             ...formValue, [name]: value
@@ -36,20 +38,42 @@ function Profile(props) {
         setError({
             ...error, [name]: e.target.validationMessage
         });
+
         setIsValid(e.target.checkValidity());
-        console.log(formValue.name)
-        console.log(currentUser.name)
-        if (!isValid || (formValue.name !== currentUser.name) || (formValue.email !== currentUser.email)) {
-            setDisabled(false)
-        } else {
-            setDisabled(true)
-        };
+
+        console.log(e.target.value);
+        console.log(isValid);
+
+        let valueEquals;
+        if (e.target.name === 'name') {
+            valueEquals = e.target.value === currentUser.name;
+        }
+
+        if (e.target.name === 'email') {
+            valueEquals = e.target.value === currentUser.email;
+        }
+
+        const disabledFlag = !isValid || valueEquals;
+        setDisabled(disabledFlag);
+        return false;
     }
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        setDisabled(true);
         const { name, email } = formValue;
-        props.onUpdateUser(name, email, setApiError(error.message))
+        props.onUpdateUser(name, email)
+            .then(x => {
+                alert('Данные успешно сохранены!')
+            })
+            .catch(err => {
+                console.log('onUpdateUser catch', err)
+                setApiError(err);
+            })
+            .finally(() => {
+                setDisabled(false);
+            });
     }
 
     return (
@@ -80,8 +104,6 @@ function Profile(props) {
                         type="email"
                         value={formValue.email}
                         onChange={handleChange}
-                        minLength="2"
-                        maxLength="30"
                         required>
                     </input>
                 </div>

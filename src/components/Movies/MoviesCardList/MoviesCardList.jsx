@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import '../../App/App.css';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -6,8 +6,6 @@ import Preloader from '../Preloader/Preloader';
 
 
 function MoviesCardList(props) {
-    const [disabled, setDisabled] = useState(true);
-
 
     return (
         <section className="cards">
@@ -24,13 +22,13 @@ function MoviesCardList(props) {
                 ))}
             </ul>
             {props.isShowPreloader && <Preloader />}
-            {!props.isShowPreloader && props.cards.length === 0 && (<span className="register__error">По вашему запросу ничего не найдено</span>)}
-            {props.hasCards ?
-                <button className="button cards__button" type="button" onClick={props.loadCards}>Ещё</button>
-                :
-                <button className="button cards__button" type="button" disabled={disabled} onClick={props.loadCards}>Ещё</button>}
+            {!props.isShowPreloader && (props.cards || []).length === 0 && (<span className="register__error">По вашему запросу ничего не найдено</span>)}
+            {(props.filteredCards || []).length === 0 ? '' : props.hasCards
+                ? <button className="button cards__button" type="button" onClick={props.loadCards}>Ещё</button>
+                : ''}
         </section>
     )
+
 }
 
 export default MoviesCardList;
