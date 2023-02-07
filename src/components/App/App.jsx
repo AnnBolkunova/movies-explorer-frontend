@@ -106,10 +106,16 @@ function App() {
 
     function handleRegister(name, email, password) {
         return mainApi.register(name, email, password)
-            .then(() => {
+            .then((data) => {
+                console.log('handleRegister', data);
+                if (!data.token) throw new Error('Missing jwt');
+                localStorage.setItem(LOCALSTORAGE_JWT, data.token);
+                setLoggedIn(true);
                 navigate('/movies');
             })
-            .catch(err => (err.message));
+            .catch(err => {
+                throw err
+            });
     }
 
     function handleLogin(email, password) {
@@ -120,11 +126,14 @@ function App() {
                 setLoggedIn(true);
                 navigate('/movies');
             })
-            .catch(err => (err.message));
+            .catch(err => {
+                throw err
+            });
     }
 
     function handleLogout() {
         localStorage.removeItem(LOCALSTORAGE_JWT);
+        setLoggedIn(false);
     }
 
     function handleUpdateUserInfo(name, email) {

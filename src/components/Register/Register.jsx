@@ -43,11 +43,22 @@ function Register(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        setDisabled(true);
         const { name, email, password } = formValue;
         props.onRegister(name, email, password, resetForm, setApiError)
+            .then(x => {
+                console.log('Данные успешно сохранены!');
+            })
+            .catch(err => {
+                console.log('onRegister catch', err)
+                setApiError(err);
+                setDisabled(true);
+            })
+            .finally(() => {
+                setDisabled(false);
+            });
     }
-
-
 
     return (
         <main className="main-register">
@@ -96,7 +107,10 @@ function Register(props) {
                 </input>
                 <span className="register__error">{error.password}</span>
                 <span className="register__error">{apiError}</span>
-                <button className="button button_bg_black register__button" type="submit" onSubmit={handleSubmit} disabled={disabled}>Зарегистрироваться</button>
+                <button className="button register__button"
+                    type="submit"
+                    onSubmit={handleSubmit}
+                    disabled={disabled}>Зарегистрироваться</button>
             </form>
             <div className="register__signin">
                 <p className="register__text">Уже зарегистрированы?</p>

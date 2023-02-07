@@ -42,9 +42,18 @@ function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        setDisabled(true);
         const { email, password } = formValue;
         props.onLogin(email, password, resetForm, setApiError)
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log('onLogin catch', err)
+                setApiError(err);
+                setDisabled(true);
+            })
+            .finally(() => {
+                setDisabled(false);
+            });
     }
 
     return (
@@ -81,7 +90,9 @@ function Login(props) {
                 </input>
                 <span className="register__error">{error.password}</span>
                 <span className="register__error">{apiError}</span>
-                <button className="button button_bg_black login__button" type="submit" disabled={disabled}>Войти</button>
+                <button className="button button_bg_black login__button"
+                    type="submit"
+                    disabled={disabled}>Войти</button>
             </form>
             <div className="login__signup">
                 <p className="login__text">Ещё не зарегистрированы?</p>
