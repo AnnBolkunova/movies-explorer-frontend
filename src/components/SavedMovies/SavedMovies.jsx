@@ -3,7 +3,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 
 function SavedMovies(props) {
-    const savedSearchName = localStorage.getItem("search-savedname") || "";
+    const savedSearchName = localStorage.getItem("") || "";
     const savedSearchShorts = (localStorage.getItem("search-isShorts-saved") === "true") ? true : false;
     useEffect(() => {
         props.onSearchSavedFilm(savedSearchName, savedSearchShorts);

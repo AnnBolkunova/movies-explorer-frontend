@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import '../App/App.css';
 import './Profile.css';
@@ -27,6 +26,13 @@ function Profile(props) {
         );
     }, [currentUser.name, currentUser.email]);
 
+    React.useEffect(() => {
+        if (!isValid || (formValue.name === currentUser.name && formValue.email === currentUser.email)) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [currentUser.name, currentUser.email, formValue.name, formValue.email, isValid]);
 
     function handleChange(e) {
         e.preventDefault();
@@ -113,7 +119,7 @@ function Profile(props) {
                     onClick={handleSubmit}
                     disabled={disabled}
                 >Редактировать</button>
-                <Link className="button profile__button profile__button_type_link" to='/signin' onClick={props.onLogout}>Выйти из аккаунта</Link>
+                <button className="button profile__button profile__button_type_link" onClick={props.onLogout}>Выйти из аккаунта</button>
                 <button className="button profile__button profile__button_type_save" type='submit'>Сохранить</button>
             </form>
         </main>

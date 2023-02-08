@@ -79,7 +79,7 @@ function Login(props) {
                 <p className="login__name" htmlFor='password'>Пароль</p>
                 <input
                     className="login__input"
-                    type="text"
+                    type="password"
                     id='password'
                     name='password'
                     value={formValue.password}

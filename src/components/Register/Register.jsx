@@ -98,7 +98,7 @@ function Register(props) {
                     className="register__input"
                     id='password'
                     name='password'
-                    type="text"
+                    type="password"
                     value={formValue.password}
                     onChange={handleChange}
                     minLength="2"

@@ -10,7 +10,7 @@ function MoviesCardList(props) {
     return (
         <section className="cards">
             <ul className="cards__list">
-                {props.cards.map((card, cardId) => (
+                {props.cards.map((card) => (
                     <MoviesCard
                         key={card.id || card.movieId}
                         card={card}

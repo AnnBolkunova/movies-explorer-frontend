@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { serializeSavedMovie } from '../../utils/Utils';
-import { LOCALSTORAGE_JWT, SHORT_DURATION, WINDOW_SIZE_BIG, WINDOW_SIZE_SMALL, INIT_AMOUNT, INIT_AMOUNT_MORE, SMALL_AMOUNT, SMALL_AMOUNT_MORE } from '../../utils/constants';
+import { LOCALSTORAGE_JWT, SHORT_DURATION, DESKTOP_WINDOW, MOBILE_WINDOW, INIT_AMOUNT, INIT_MORE, MOBILE_AMOUNT, MOBILE_MORE } from '../../utils/constants';
 
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
@@ -55,15 +55,15 @@ function App() {
     const navigate = useNavigate();
 
     function calcCardsCounter() {
-        const counter = { init: INIT_AMOUNT, more: INIT_AMOUNT_MORE };
+        const counter = { init: INIT_AMOUNT, more: INIT_MORE };
 
-        if (window.innerWidth < WINDOW_SIZE_BIG) {
+        if (window.innerWidth < DESKTOP_WINDOW) {
             counter.init = INIT_AMOUNT;
-            counter.more = INIT_AMOUNT_MORE;
+            counter.more = INIT_MORE;
         }
-        if (window.innerWidth < WINDOW_SIZE_SMALL) {
-            counter.init = SMALL_AMOUNT;
-            counter.more = SMALL_AMOUNT_MORE;
+        if (window.innerWidth < MOBILE_WINDOW) {
+            counter.init = MOBILE_AMOUNT;
+            counter.more = MOBILE_MORE;
         }
 
         return counter;
@@ -133,7 +133,15 @@ function App() {
 
     function handleLogout() {
         localStorage.removeItem(LOCALSTORAGE_JWT);
+        localStorage.clear();
         setLoggedIn(false);
+        setCurrentUser({})
+        setCards([]);
+        setSavedMovies([]);
+        setFilteredCards([]);
+        setFilteredSavedMovies([]);
+        mainApi.setToken('');
+        navigate('/');
     }
 
     function handleUpdateUserInfo(name, email) {
@@ -187,11 +195,11 @@ function App() {
                 .then((res) => {
                     if (res && res.data) {
                         localStorage.setItem('savedMovies', JSON.stringify(res.data));
+                        setSavedMovies(res.data);
+                        setFilteredSavedMovies(filterCardsBound(res.data));
                     } else {
                         localStorage.removeItem('savedMovies');
                     }
-                    setSavedMovies(res.data);
-                    setFilteredSavedMovies(filterCardsBound(res.data));
                 })
                 .catch(err => console.log(err))
                 .finally(() => {
@@ -202,7 +210,6 @@ function App() {
         }
     }
 
-    //Сохраняем фильм
     function handleCardLike(card) {
         const cardId = card.id || card.movieId;
 
@@ -232,13 +239,18 @@ function App() {
                 <Header loggedIn={loggedIn} email={currentUser.email} />
                 <Routes>
                     <Route exact path='/' element={<Main />} />
-                    <Route path='/signup' element={<Register onRegister={handleRegister} />} />
-                    <Route path='/signin' element={<Login onLogin={handleLogin} />} />
+                    <Route path='/signup' element={
+                        <ProtectedRoute loggedIn={!loggedIn}>
+                            <Register onRegister={handleRegister} />
+                        </ProtectedRoute>} />
+                    <Route path='/signin' element={
+                        <ProtectedRoute loggedIn={!loggedIn}>
+                            <Login onLogin={handleLogin} />
+                        </ProtectedRoute>} />
                     <Route path='/profile' element={
                         <ProtectedRoute loggedIn={loggedIn}>
                             <Profile onUpdateUser={handleUpdateUserInfo} onLogout={handleLogout} />
-                        </ProtectedRoute>
-                    } />
+                        </ProtectedRoute>} />
                     <Route path='/movies' element={
                         <ProtectedRoute loggedIn={loggedIn}>
                             <Movies
@@ -252,8 +264,7 @@ function App() {
                                 savedMoviesById={savedMoviesById}
                                 onCardLike={handleCardLike}
                             />
-                        </ProtectedRoute>
-                    } />
+                        </ProtectedRoute>} />
                     <Route path='/saved-movies' element={
                         <ProtectedRoute loggedIn={loggedIn}>
                             <SavedMovies
