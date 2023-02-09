@@ -1,14 +1,30 @@
-import React from "react";
+import { React, useEffect } from "react";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 
 function SavedMovies(props) {
+    const savedSearchName = localStorage.getItem("") || "";
+    const savedSearchShorts = (localStorage.getItem("search-isShorts-saved") === "true") ? true : false;
+    useEffect(() => {
+        props.onSearchSavedFilm(savedSearchName, savedSearchShorts);
+    }, []);
+
     return (
         <div className="movies">
-            <SearchForm />
-            <MoviesCardList cards={props.cards} />
+            <SearchForm
+                onSubmit={props.onSearchSavedFilm}
+                savedSearchName={savedSearchName}
+                savedSearchShorts={savedSearchShorts}
+            />
+            <MoviesCardList
+                cards={props.cards}
+                savedMovies={props.savedMovies}
+                savedMoviesById={props.savedMoviesById}
+                isShowPreloader={props.isShowPreloader}
+                onCardLike={props.onCardLike}
+            />
         </div>
     )
-};
+}
 
 export default SavedMovies;

@@ -1,30 +1,34 @@
-import React from "react";
+import { React } from "react";
 import '../../App/App.css';
 import './MoviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
-import image1 from '../../../images/cards/33_words.jpg';
-import image2 from '../../../images/cards/kinoalm.jpg';
-import image3 from '../../../images/cards/banksy.jpg';
-import image4 from '../../../images/cards/baskia.jpg';
+import Preloader from '../Preloader/Preloader';
 
 
-function MoviesCardList() {
-    const card1 = '33 слова о дизайне';
-    const card2 = 'Киноальманах «100 лет дизайна»';
-    const card3 = 'В погоне за Бенкси';
-    const card4 = 'Баския: Взрыв реальности';
+function MoviesCardList(props) {
 
     return (
         <section className="cards">
             <ul className="cards__list">
-                <MoviesCard image={image1} name={card1} />
-                <MoviesCard image={image2} name={card2} />
-                <MoviesCard image={image3} name={card3} />
-                <MoviesCard image={image4} name={card4} />
+                {props.cards.map((card) => (
+                    <MoviesCard
+                        key={card.id || card.movieId}
+                        card={card}
+                        liked={props.savedMoviesById[card.id || card.movieId]}
+                        savedMovies={props.savedMovies}
+                        loadCards={props.loadCards}
+                        onCardLike={props.onCardLike}
+                    />
+                ))}
             </ul>
-            <button className="button cards__button" type="button">Ещё</button>
+            {props.isShowPreloader && <Preloader />}
+            {!props.isShowPreloader && (props.cards || []).length === 0 && (<span className="register__error">По вашему запросу ничего не найдено</span>)}
+            {(props.filteredCards || []).length === 0 ? '' : props.hasCards
+                ? <button className="button cards__button" type="button" onClick={props.loadCards}>Ещё</button>
+                : ''}
         </section>
     )
+
 }
 
 export default MoviesCardList;

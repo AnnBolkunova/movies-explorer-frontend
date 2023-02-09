@@ -43,10 +43,6 @@
     color: #FFFFFF;
 }
 
-.register__input:last-of-type {
-    color: #EE3465;
-}
-
 .register__error {
     color: #EE3465;
     font-weight: 400;
